@@ -23,21 +23,24 @@ function input(question) {
 
   const x_values = [];
   const y_values = [];
+  
+  console.log("");
 
   for (let i = 0; i < m; i++) {
-    const secret = await input(`Enter the Share_${i}:`);
+    const secret = await input(`Enter the Share_${i}: `);
     const x = BigInt(parseInt(secret.slice(0, 4), 16));
     const y_hex = secret.slice(4);
     const y = BigInt(h2d(y_hex));
     x_values.push(x);
     y_values.push(y);
+    console.log("");
   }
 
   const x = x_values;
   const y = y_values;
   const result = lagrange_interpolation(x, y);
   secret = result.toString(16).padStart(64, "0");
-  console.log(secret);
+  console.log("Recovered secret: " + secret);
 
   process.exit()
 
