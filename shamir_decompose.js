@@ -104,8 +104,17 @@ function x_value(p) {
 function poly(x, coeffs, p){
   let result = BigInt(0);
   for(let i = 0; i < coeffs.length; i++){
-    i = BigInt(i);
-    result += coeffs[i] * x ** i;
+    // result += coeffs[i] * x ** BigInt(i);
+    let x_pow_i = powBigInt(x, BigInt(i))
+    result += coeffs[i] * x_pow_i
   }
   return result % p;
+}
+
+function powBigInt(base, exponent) {
+  let the_result = BigInt(1)
+  for(let i = 0; i < exponent; i++){
+    the_result *= base
+  }
+  return the_result
 }
